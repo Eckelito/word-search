@@ -1,0 +1,28 @@
+.board{
+    border-width:5px;
+    border-color: black;
+    border-style: solid;
+    width: 600px;
+    height: 600px;
+    padding:0px;
+    margin:0px;
+    display:grid;
+    grid-template-rows: repeat(10, 10%);
+}
+
+.cell{
+
+    font-family:sans-serif;
+    font-size: 30px;
+    margin: 0px;
+    padding: 0px;
+    text-align:center;
+    line-height: 60px;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    padding:0px;
+    margin:0px;
+}
