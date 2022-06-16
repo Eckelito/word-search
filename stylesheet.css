@@ -43,9 +43,9 @@ body {
 
 @media (max-aspect-ratio: 115/90) {
     .container {
-        height: min(45vh, 90vw);
-        width: min(45vh, 90vw);
-        border-width: calc(min(45vh, 90vw) * (0.75/100));
+        height: min(65vh, 90vw);
+        width: min(65vh, 90vw);
+        border-width: calc(min(65vh, 90vw) * (0.75/100));
     }
 }
 
@@ -78,8 +78,8 @@ body {
 
 @media (max-aspect-ratio: 115/90) {
     .cell {
-        font-size: calc(min(45vh, 90vw) * (1/20));
-        line-height: calc(min(45vh, 90vw) * (1/10));
+        font-size: calc(min(65vh, 90vw) * (1/20));
+        line-height: calc(min(65vh, 90vw) * (1/10));
     }
 }
 
@@ -90,7 +90,7 @@ body {
 
 #wordList {
 
-    padding-top: 4vmin;
+    margin-top: 4vmin;
     padding-left: 2vmin;
 }
 
@@ -104,6 +104,7 @@ body {
     #wordList {
         height: auto;
         padding-top: 0vmin;
+        margin: 0;
     }
 }
 
@@ -111,12 +112,16 @@ body {
     font-family: sans-serif;
     font-weight: normal;
     font-size: 4.5vmin;
+    height: 9vmin;
+    margin: 0;
 }
 
 @media (max-aspect-ratio: 115/90) {
     #wordList>h1 {
         margin: 2vmin;
-        font-size: calc(min(45vh, 90vw) * (1/20));
+        font-size: calc(min(65vh, 90vw) * (1/20));
+        height: auto;
+        text-align: center;
     }
 }
 
