@@ -68,6 +68,10 @@ function setWord(word) {
 
 }
 
+function getElementByTouch(e) {
+    let targetTouch = e.targetTouches[0];
+    return document.elementFromPoint(targetTouch.clientX, targetTouch.clientY);
+}
 
 window.onload = function () {
     let x1, x2, y1, y2;
@@ -84,15 +88,6 @@ window.onload = function () {
         line.setAttribute("y2", coordinateToCSSPos(y2));
     }
 
-    function touchState(e) {
-        if (state == 1) {
-            lineInitiate(e);
-        }
-        else if (state == 2) {
-            lineUpdate(e);
-        }
-    }
-
     function lineInitiate(e) {
         if (state == 1) {
             let x = Number(e.target.dataset.x);
@@ -105,13 +100,29 @@ window.onload = function () {
         }
     }
 
+    function lineUpdateTouch(e) {
+        if (state == 2) {
+            let el = getElementByTouch(e);
+            if (el.className == "cell") {
+                let x = Number(el.dataset.x);
+                let y = Number(el.dataset.y);
+                [x2, y2] = [x, y];
+                if (isAligned([x1, y1], [x, y])) {
+                    [x2Valid, y2Valid] = [x2, y2];
+                    drawLine();
+                }
+            }
+        }
+    }
+
+
     function lineUpdate(e) {
         if (state == 2) {
             let x = Number(e.target.dataset.x);
             let y = Number(e.target.dataset.y);
             [x2, y2] = [x, y];
             if (isAligned([x1, y1], [x, y])) {
-                [x2Valid, y2Valid] = [x2, y2];  
+                [x2Valid, y2Valid] = [x2, y2];
                 drawLine();
             }
         }
@@ -140,10 +151,13 @@ window.onload = function () {
     for (let cell of cells) {
         setRandLetter(cell);
         cell.addEventListener('mousedown', lineInitiate, false);
+        cell.addEventListener('touchstart', lineInitiate, false);
         cell.addEventListener('mouseover', lineUpdate, false);
     }
 
+    document.addEventListener('touchmove', lineUpdateTouch, false);
     document.body.addEventListener('mouseup', lineFinish, false);
+    document.body.addEventListener('touchend', lineFinish, false);
 
 
 

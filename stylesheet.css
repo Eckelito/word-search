@@ -1,5 +1,6 @@
 html {
     height: 100%;
+    touch-action: none;
 }
 
 body {
@@ -16,7 +17,7 @@ body {
 @media (max-aspect-ratio: 115/90) {
     body {
         flex-direction: column;
-        
+
     }
 }
 
@@ -36,14 +37,14 @@ body {
     border-width: 0.675vmin;
     border-color: black;
     border-style: solid;
-    transform-origin: top left; 
+    transform-origin: top left;
     flex: none;
 }
 
 @media (max-aspect-ratio: 115/90) {
     .container {
-        height:min(45vh, 90vw);
-        width:min(45vh, 90vw);
+        height: min(45vh, 90vw);
+        width: min(45vh, 90vw);
         border-width: calc(min(45vh, 90vw) * (0.75/100));
     }
 }
@@ -76,7 +77,7 @@ body {
 }
 
 @media (max-aspect-ratio: 115/90) {
-    .cell{
+    .cell {
         font-size: calc(min(45vh, 90vw) * (1/20));
         line-height: calc(min(45vh, 90vw) * (1/10));
     }
@@ -119,7 +120,7 @@ body {
     }
 }
 
-#wordList>h1[data-found = "true"] {
+#wordList>h1[data-found="true"] {
     text-decoration: line-through;
 }
 
