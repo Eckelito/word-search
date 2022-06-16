@@ -51,7 +51,7 @@ function getCell(c) {
     return document.querySelector(`[data-x='${x}'][data-y='${y}']`)
 }
 
-function getWordLabel(word){
+function getWordLabel(word) {
     return document.querySelector(`#wordList :nth-child(${word.index})`)
 }
 
@@ -65,9 +65,8 @@ function setWord(word) {
     }
 
     getWordLabel(word).innerHTML = word.wordStr;
-    
-}
 
+}
 
 
 window.onload = function () {
@@ -85,8 +84,16 @@ window.onload = function () {
         line.setAttribute("y2", coordinateToCSSPos(y2));
     }
 
+    function touchState(e) {
+        if (state == 1) {
+            lineInitiate(e);
+        }
+        else if (state == 2) {
+            lineUpdate(e);
+        }
+    }
+
     function lineInitiate(e) {
-        e.preventDefault(); 
         if (state == 1) {
             let x = Number(e.target.dataset.x);
             let y = Number(e.target.dataset.y);
@@ -104,8 +111,7 @@ window.onload = function () {
             let y = Number(e.target.dataset.y);
             [x2, y2] = [x, y];
             if (isAligned([x1, y1], [x, y])) {
-                x2Valid = x2;
-                y2Valid = y2;
+                [x2Valid, y2Valid] = [x2, y2];  
                 drawLine();
             }
         }
@@ -116,7 +122,7 @@ window.onload = function () {
             if (((word.startX == x1 && word.endX == x2Valid) ||
                 (word.startX == x2Valid && word.endX == x1)) &&
                 ((word.startY == y1 && word.endY == y2Valid) ||
-                (word.startY == y2Valid && word.endY == y1))) {
+                    (word.startY == y2Valid && word.endY == y1))) {
                 if (!word.isFound) {
                     word.isFound = true;
                     line.dataset.state = "found";
@@ -131,25 +137,16 @@ window.onload = function () {
         state = 1;
     }
 
-    function preventBehavior(e) {
-        e.preventDefault(); 
-    };
-
-    document.addEventListener("touchmove", preventBehavior, {passive: false});
-
     for (let cell of cells) {
         setRandLetter(cell);
         cell.addEventListener('mousedown', lineInitiate, false);
-        cell.addEventListener('touchstart', lineInitiate, false);
         cell.addEventListener('mouseover', lineUpdate, false);
-        cell.addEventListener('touchmove', lineInitiate, false);
     }
 
     document.body.addEventListener('mouseup', lineFinish, false);
-    document.body.addEventListener('touchend', lineFinish, false);
 
 
-   
+
 
     words.forEach(setWord);
 }
