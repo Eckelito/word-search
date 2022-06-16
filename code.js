@@ -130,6 +130,12 @@ window.onload = function () {
         state = 1;
     }
 
+    function preventBehavior(e) {
+        e.preventDefault(); 
+    };
+
+    document.addEventListener("touchmove", preventBehavior, {passive: false});
+
     for (let cell of cells) {
         setRandLetter(cell);
         cell.addEventListener('mousedown', lineInitiate, false);
@@ -141,6 +147,8 @@ window.onload = function () {
     document.body.addEventListener('mouseup', lineFinish, false);
     document.body.addEventListener('touchend', lineFinish, false);
 
+
+   
 
     words.forEach(setWord);
 }
