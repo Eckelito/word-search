@@ -86,6 +86,7 @@ window.onload = function () {
     }
 
     function lineInitiate(e) {
+        e.preventDefault(); 
         if (state == 1) {
             let x = Number(e.target.dataset.x);
             let y = Number(e.target.dataset.y);
