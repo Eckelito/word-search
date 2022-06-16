@@ -8,7 +8,22 @@ body {
     margin: 0;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    flex-shrink: 0;
+    flex-wrap: none;
+}
+
+
+@media (max-aspect-ratio: 115/90) {
+    body {
+        flex-direction: column;
+        
+    }
+}
+
+@media (min-aspect-ratio: 115/90) {
+    body {
+        flex-wrap: none;
+    }
 }
 
 .container {
@@ -21,20 +36,28 @@ body {
     border-width: 0.675vmin;
     border-color: black;
     border-style: solid;
-    transform-origin: top left;
-
+    transform-origin: top left; 
+    flex: none;
 }
 
-.board {
+@media (max-aspect-ratio: 115/90) {
+    .container {
+        height:min(45vh, 90vw);
+        width:min(45vh, 90vw);
+        border-width: calc(min(45vh, 90vw) * (0.75/100));
+    }
+}
+
+#WSBoard {
     grid-area: 1 / 1;
     margin: 0;
     display: grid;
     grid-template: repeat(10, 10fr) / repeat(10, 10fr);
     align-items: center;
+
 }
 
 .cell {
-
     font-family: sans-serif;
     font-size: 4.5vmin;
     margin: 0vmin;
@@ -52,11 +75,53 @@ body {
     /* Standard */
 }
 
-.drawArea {
+@media (max-aspect-ratio: 115/90) {
+    .cell{
+        font-size: calc(min(45vh, 90vw) * (1/20));
+        line-height: calc(min(45vh, 90vw) * (1/10));
+    }
+}
+
+#drawArea {
     grid-area: 1 / 1;
     z-index: -1;
 }
 
+#wordList {
+
+    padding-top: 4vmin;
+    padding-left: 2vmin;
+}
+
+@media (min-aspect-ratio: 115/90) {
+    #wordList {
+        height: 90vmin;
+    }
+}
+
+@media (max-aspect-ratio: 115/90) {
+    #wordList {
+        height: auto;
+        padding-top: 0vmin;
+    }
+}
+
+#wordList>h1 {
+    font-family: sans-serif;
+    font-weight: normal;
+    font-size: 4.5vmin;
+}
+
+@media (max-aspect-ratio: 115/90) {
+    #wordList>h1 {
+        margin: 2vmin;
+        font-size: calc(min(45vh, 90vw) * (1/20));
+    }
+}
+
+#wordList>h1[data-found = "true"] {
+    text-decoration: line-through;
+}
 
 
 .WSLine {

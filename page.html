@@ -7,8 +7,8 @@
 
 <body>
     <div class="container">
-        
-        <div class="board">
+
+        <div id="WSBoard">
 
             <div class="cell" id="A1" data-x="1" data-y="1"></div>
             <div class="cell" id="B1" data-x="2" data-y="1"></div>
@@ -122,7 +122,7 @@
 
 
         </div>
-        <svg class="drawArea" style="width:100%; height: 100%;">
+        <svg id="drawArea" style="width:100%; height: 100%;">
             <line class="WSLine" stroke-linecap="round" stroke-linejoin="round" data-state="off"></line>
             <line class="WSLine" stroke-linecap="round" stroke-linejoin="round" data-state="off"></line>
             <line class="WSLine" stroke-linecap="round" stroke-linejoin="round" data-state="off"></line>
@@ -135,9 +135,15 @@
             <line class="WSLine" stroke-linecap="round" stroke-linejoin="round" data-state="off"></line>
         </svg>
 
-        <div id="wordArea"></div>
     </div>
-<div id="box"></div>
+
+    <div id="wordList">
+        <h1 class="wordLabel" data-found="false"></h1>
+        <h1 class="wordLabel" data-found="false"></h1>
+        <h1 class="wordLabel" data-found="false"></h1>
+        <h1 class="wordLabel" data-found="false"></h1>
+        <h1 class="wordLabel" data-found="false"></h1>
+    </div>
 
 
 

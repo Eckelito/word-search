@@ -4,7 +4,8 @@ const cells = document.getElementsByClassName("cell");
 class wordC {
     isFound = false;
 
-    constructor(word, startC, endC) {
+    constructor(word, startC, endC, index) {
+        this.index = index;
         this.wordStr = word;
         [this.startX, this.startY] = startC;
         [this.endX, this.endY] = endC;
@@ -13,11 +14,11 @@ class wordC {
 }
 
 let words = [];
-words.push(new wordC("KANGAROO", [1, 1], [8, 8]));
-words.push(new wordC("ELEPHANT", [1, 2], [8, 9]));
-words.push(new wordC("MALIBU", [2, 1], [2, 6]));
-words.push(new wordC("GOKART", [4, 4], [9, 4]));
-words.push(new wordC("POTATO", [9, 2], [9, 7]));
+words.push(new wordC("KANGAROO", [1, 1], [8, 8], 1));
+words.push(new wordC("ELEPHANT", [1, 2], [8, 9], 2));
+words.push(new wordC("MALIBU", [2, 1], [2, 6], 3));
+words.push(new wordC("GOKART", [4, 4], [9, 4], 4));
+words.push(new wordC("POTATO", [9, 2], [9, 7], 5));
 
 function coordinateToCSSPos(c) {
     return ((c - 1) * 10 + 5) + "%";
@@ -50,6 +51,10 @@ function getCell(c) {
     return document.querySelector(`[data-x='${x}'][data-y='${y}']`)
 }
 
+function getWordLabel(word){
+    return document.querySelector(`#wordList :nth-child(${word.index})`)
+}
+
 function setWord(word) {
     let [x, y] = [word.startX, word.startY];
     for (let i = 0; i < word.wordStr.length; i++) {
@@ -58,7 +63,12 @@ function setWord(word) {
         x += word.xDir;
         y += word.yDir;
     }
+
+    getWordLabel(word).innerHTML = word.wordStr;
+    
 }
+
+
 
 window.onload = function () {
     let x1, x2, y1, y2;
@@ -111,6 +121,8 @@ window.onload = function () {
                     line.dataset.state = "found";
                     wordsFound++;
                     line = lines[wordsFound];
+                    let label = getWordLabel(word);
+                    label.dataset.found = "true";
                 }
             }
         }
@@ -121,10 +133,14 @@ window.onload = function () {
     for (let cell of cells) {
         setRandLetter(cell);
         cell.addEventListener('mousedown', lineInitiate, false);
+        cell.addEventListener('touchstart', lineInitiate, false);
         cell.addEventListener('mouseover', lineUpdate, false);
+        cell.addEventListener('touchmove', lineInitiate, false);
     }
 
     document.body.addEventListener('mouseup', lineFinish, false);
+    document.body.addEventListener('touchend', lineFinish, false);
+
 
     words.forEach(setWord);
 }
