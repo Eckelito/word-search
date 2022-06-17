@@ -1,4 +1,4 @@
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+import {alphabet, wordData} from './parseInput.js';
 const cells = document.getElementsByClassName("cell");
 
 class wordC {
@@ -13,12 +13,11 @@ class wordC {
     }
 }
 
-let words = [];
-words.push(new wordC("KANGAROO", [1, 1], [8, 8], 1));
-words.push(new wordC("ELEPHANT", [1, 2], [8, 9], 2));
-words.push(new wordC("MALIBU", [2, 1], [2, 6], 3));
-words.push(new wordC("GOKART", [4, 4], [9, 4], 4));
-words.push(new wordC("POTATO", [9, 2], [9, 7], 5));
+const wordObjs = [];
+for (let entry of wordData) {
+    wordObjs.push(new wordC(...entry));
+}
+
 
 function coordinateToCSSPos(c) {
     return ((c - 1) * 10 + 5) + "%";
@@ -115,7 +114,6 @@ window.onload = function () {
         }
     }
 
-
     function lineUpdate(e) {
         if (state == 2) {
             let x = Number(e.target.dataset.x);
@@ -129,7 +127,7 @@ window.onload = function () {
     }
 
     function lineFinish(e) {
-        for (word of words) {
+        for (let word of wordObjs) {
             if (((word.startX == x1 && word.endX == x2Valid) ||
                 (word.startX == x2Valid && word.endX == x1)) &&
                 ((word.startY == y1 && word.endY == y2Valid) ||
@@ -159,8 +157,5 @@ window.onload = function () {
     document.body.addEventListener('mouseup', lineFinish, false);
     document.body.addEventListener('touchend', lineFinish, false);
 
-
-
-
-    words.forEach(setWord);
+    wordObjs.forEach(setWord);
 }

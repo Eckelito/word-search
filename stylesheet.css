@@ -32,9 +32,9 @@ body {
     grid-template: 1fr / 1fr;
     padding: 0;
     margin: 0;
-    height: 90vmin;
-    width: 90vmin;
-    border-width: 0.675vmin;
+    height: 90vh;
+    width: 90vh;
+    border-width: 0.675vh;
     border-color: black;
     border-style: solid;
     transform-origin: top left;
@@ -60,12 +60,15 @@ body {
 
 .cell {
     font-family: sans-serif;
-    font-size: 4.5vmin;
-    margin: 0vmin;
-    padding: 0vmin;
+    font-size: 4.5vh;
+    margin: 0vh;
+    padding: 0vh;
     text-align: center;
-    line-height: 9vmin;
+    line-height: 9vh;
     z-index: 1;
+}
+
+.cell, #wordList>h1{
     -webkit-user-select: none;
     /* Safari */
     -moz-user-select: none;
@@ -90,20 +93,20 @@ body {
 
 #wordList {
 
-    margin-top: 4vmin;
-    padding-left: 2vmin;
+    margin-top: 4vh;
+    padding-left: 2vh;
 }
 
 @media (min-aspect-ratio: 115/90) {
     #wordList {
-        height: 90vmin;
+        height: 90vh;
     }
 }
 
 @media (max-aspect-ratio: 115/90) {
     #wordList {
         height: auto;
-        padding-top: 0vmin;
+        padding-top: 0vh;
         margin: 0;
     }
 }
@@ -111,15 +114,15 @@ body {
 #wordList>h1 {
     font-family: sans-serif;
     font-weight: normal;
-    font-size: 4.5vmin;
-    height: 9vmin;
+    font-size: 4.5vh;
+    height: 9vh;
     margin: 0;
 }
 
 @media (max-aspect-ratio: 115/90) {
     #wordList>h1 {
         margin: 2vmin;
-        font-size: calc(min(65vh, 90vw) * (1/20));
+        font-size: calc(min(65vh    , 90vw) * (1/20));
         height: auto;
         text-align: center;
     }
